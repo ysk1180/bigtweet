@@ -23,7 +23,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    next_id = Post.last.id + 1
+    next_id = 1
     make_picture(next_id)
     if @post.save
       redirect_to confirm_path(@post)
