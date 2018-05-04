@@ -88,6 +88,7 @@ GEM
     concurrent-ruby (1.0.5)
     crass (1.0.4)
     debug_inspector (0.0.3)
+    diffy (3.2.0)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.4.0)
@@ -373,6 +374,9 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    ridgepole (0.7.2)
+      activerecord (>= 5.0.1, < 6)
+      diffy
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
     sass (3.5.6)
@@ -466,6 +470,7 @@ DEPENDENCIES
   rack-rewrite
   rails (~> 5.2.0)
   rails-i18n
+  ridgepole
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
