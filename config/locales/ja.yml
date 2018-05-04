@@ -8,8 +8,7 @@ ja:
       user:
         nickname: "Twitter ID"
       post:
-        content: "twitter本文の内容（例の①の部分） ※入力任意"
-        power: "画像内の内容（例の②の部分） ※入力必須"
+        power: "画像内の文字入力"
         kind: "画像の種類"
     errors:
       messages:
