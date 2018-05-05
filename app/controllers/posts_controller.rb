@@ -53,7 +53,7 @@ class PostsController < ApplicationController
       n = (content.length / 7).floor + 1
       n.times do |i|
         s_num = i * 7
-        f_num = s_num + 8
+        f_num = s_num + 6
         range =  Range.new(s_num,f_num)
         sentense += content.slice(range)
         sentense += "\n" if n != i+1
