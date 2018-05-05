@@ -50,7 +50,12 @@
     <%= form.label :power %>
     <%= form.text_area :power, id: 'power', class:'form-control', rows:"3" %>
     <small class="text-muted">改行は半角スペースに変換されます</small>
-    <p id="power_check">0文字 / max 90文字</p>
+    <% if @post.power.present? %>
+      <% number = @post.power.length %>
+    <% else %>
+      <% number = 0 %>
+    <% end %>
+    <p id="power_check"><%= number %>文字 / max 90文字</p>
   </div>
 
   <div class="actions">
