@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:confirm, :edit, :update]
+  before_action :set_post, only: [:confirm, :edit, :update, :show]
   before_action :new_post, only: [:show, :new]
 
   def show
@@ -13,8 +13,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    make_picture(@post.id)
     if @post.update(post_params)
+      make_picture(@post.id)
       redirect_to confirm_path(@post)
     else
       render :edit
