@@ -10,7 +10,7 @@ module ApplicationHelper
     end
     twitter_card[:title] = "BigTweet"
     twitter_card[:card] = 'summary_large_image'
-    twitter_card[:description] = '会員登録不要！10秒で画像に文字入りのツイートをしてみよう！画像生成してからツイートするか決めれます。'
+    twitter_card[:description] = '会員登録不要！10秒で画像に文字入りのツイートをしてみよう！画像生成後、確認してからツイートするか決めれます。'
     twitter_card
   end
 end
