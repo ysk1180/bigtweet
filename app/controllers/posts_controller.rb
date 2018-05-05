@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:confirm, :edit, :update, :show]
+  before_action :set_post, only: [:confirm, :edit, :update]
   before_action :new_post, only: [:show, :new]
 
   def show
+    @post.id = params[:id]
     render :new
   end
 
