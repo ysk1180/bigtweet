@@ -49,7 +49,17 @@ class PostsController < ApplicationController
   def make_picture(next_id)
     sentense = ""
     content = @post.power.gsub(/\r\n|\r|\n/," ")
-    if content.length <= 50 then
+    if content.length <= 28 then
+      n = (content.length / 7).floor + 1
+      n.times do |i|
+        s_num = i * 7
+        f_num = s_num + 8
+        range =  Range.new(s_num,f_num)
+        sentense += content.slice(range)
+        sentense += "\n" if n != i+1
+      end
+      pointsize = 90
+    elsif content.length <= 50 then
       n = (content.length / 10).floor + 1
       n.times do |i|
         s_num = i * 10
@@ -70,50 +80,68 @@ class PostsController < ApplicationController
       end
       pointsize = 45
     end
+    color = "white"
+    draw = "text 0,0 '#{sentense}'"
     font = ".fonts/Jiyucho.ttf"
     case @post.kind
     when "thunder" then
       base = "thunder.png"
-      color = "white"
     when "muscle" then
       base = "muscle.png"
       color = "black"
     when "cat" then
       base = "cat.png"
-      color = "white"
     when "love" then
       base = "love.png"
-      color = "white"
     when "shock" then
       base = "shock.png"
-      color = "white"
     when "fuck" then
       base = "fuck.png"
-      color = "white"
     when "lion" then
       base = "lion.png"
-      color = "white"
     when "balloon" then
       base = "balloon.png"
-      color = "black"
     when "happy" then
       base = "happy.png"
       color = "black"
     when "old" then
       base = "old.png"
-      color = "white"
     when "people" then
       base = "people.png"
-      color = "white"
     when "star" then
       base = "star.png"
-      color = "white"
     when "sunset" then
       base = "sunset.png"
-      color = "white"
+    when "panic" then
+      base = "panic.jpg"
+      color = "black"
+      draw = "text -120,0 '#{sentense}'"
+    when "joy1" then
+      base = "joy1.jpg"
+      color = "black"
+      draw = "text 0,-115 '#{sentense}'"
+    when "joy2" then
+      base = "joy2.jpg"
+      color = "black"
+      draw = "text -130,-30 '#{sentense}'"
+    when "joy3" then
+      base = "joy3.jpg"
+      draw = "text -145,-35 '#{sentense}'"
+    when "joy4" then
+      base = "joy4.jpg"
+      color = "black"
+      draw = "text -130,-10 '#{sentense}'"
+    when "wow" then
+      base = "wow.jpg"
+      draw = "text -125,-10 '#{sentense}'"
+    when "cow" then
+      base = "cow.jpg"
+      draw = "text -130,0 '#{sentense}'"
+    when "think" then
+      base = "think.jpg"
+      draw = "text 110,-10 '#{sentense}'"
     else
       base = "fire.png"
-      color = "white"
     end
     image = MiniMagick::Image.open(base)
     image.combine_options do |i|
@@ -121,7 +149,7 @@ class PostsController < ApplicationController
       i.fill color
       i.gravity 'center'
       i.pointsize pointsize
-      i.draw "text 0,0 '#{sentense}'"
+      i.draw draw
     end
     storage = Fog::Storage.new(
       provider: 'AWS',
