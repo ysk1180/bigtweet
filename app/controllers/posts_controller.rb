@@ -101,6 +101,7 @@ class PostsController < ApplicationController
       base = "lion.png"
     when "balloon" then
       base = "balloon.png"
+      color = "black"
     when "happy" then
       base = "happy.png"
       color = "black"
