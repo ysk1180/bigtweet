@@ -82,7 +82,7 @@ class PostsController < ApplicationController
     end
     color = "white"
     draw = "text 0,0 '#{sentense}'"
-    font = ".fonts/Jiyucho.ttf"
+    font = ".fonts/GenEiGothicN-U-KL.otf"
     case @post.kind
     when "thunder" then
       base = "thunder.png"
@@ -141,6 +141,41 @@ class PostsController < ApplicationController
     when "think" then
       base = "think.jpg"
       draw = "text 110,-10 '#{sentense}'"
+    when "black" then
+      base = "black.jpg"
+      pointsize += 30
+    when "brown" then
+      base = "brown.jpg"
+      pointsize += 30
+    when "darkblue" then
+      base = "darkblue.jpg"
+      pointsize += 30
+    when "purple" then
+      base = "purple.jpg"
+      pointsize += 30
+    when "red" then
+      base = "red.jpg"
+      pointsize += 30
+    when "lightgreen" then
+      base = "lightgreen.jpg"
+      color = "black"
+      pointsize += 30
+    when "pink" then
+      base = "pink.jpg"
+      color = "black"
+      pointsize += 30
+    when "skyblue" then
+      base = "skyblue.jpg"
+      color = "black"
+      pointsize += 30
+    when "white" then
+      base = "white.jpg"
+      color = "black"
+      pointsize += 30
+    when "yellow" then
+      base = "yellow.jpg"
+      color = "black"
+      pointsize += 30
     else
       base = "fire.png"
     end
