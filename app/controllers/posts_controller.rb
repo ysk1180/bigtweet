@@ -13,6 +13,9 @@ class PostsController < ApplicationController
   def new
   end
 
+  def edit
+  end
+
   def update
     if @post.update(post_params)
       make_picture(@post.id)
@@ -43,10 +46,10 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:power, :picture, :kind)
+    params.require(:post).permit(:power, :kind)
   end
 
-  def make_picture(next_id)
+  def make_picture(id)
     sentense = ""
     content = @post.power.gsub(/\r\n|\r|\n/," ")
     if content.length <= 28 then
@@ -85,99 +88,99 @@ class PostsController < ApplicationController
     font = ".fonts/GenEiGothicN-U-KL.otf"
     case @post.kind
     when "thunder" then
-      base = "thunder.png"
+      base = "app/assets/images/thunder.png"
     when "muscle" then
-      base = "muscle.png"
+      base = "app/assets/images/muscle.png"
       color = "black"
     when "cat" then
-      base = "cat.png"
+      base = "app/assets/images/cat.png"
     when "love" then
-      base = "love.png"
+      base = "app/assets/images/love.png"
     when "shock" then
-      base = "shock.png"
+      base = "app/assets/images/shock.png"
     when "fuck" then
-      base = "fuck.png"
+      base = "app/assets/images/fuck.png"
     when "lion" then
-      base = "lion.png"
+      base = "app/assets/images/lion.png"
     when "balloon" then
-      base = "balloon.png"
+      base = "app/assets/images/balloon.png"
       color = "black"
     when "happy" then
-      base = "happy.png"
+      base = "app/assets/images/happy.png"
       color = "black"
     when "old" then
-      base = "old.png"
+      base = "app/assets/images/old.png"
     when "people" then
-      base = "people.png"
+      base = "app/assets/images/people.png"
     when "star" then
-      base = "star.png"
+      base = "app/assets/images/star.png"
     when "sunset" then
-      base = "sunset.png"
+      base = "app/assets/images/sunset.png"
     when "panic" then
-      base = "panic.jpg"
+      base = "app/assets/images/panic.jpg"
       color = "black"
       draw = "text -120,0 '#{sentense}'"
     when "joy1" then
-      base = "joy1.jpg"
+      base = "app/assets/images/joy1.jpg"
       color = "black"
       draw = "text 0,-115 '#{sentense}'"
     when "joy2" then
-      base = "joy2.jpg"
+      base = "app/assets/images/joy2.jpg"
       color = "black"
       draw = "text -130,-30 '#{sentense}'"
     when "joy3" then
-      base = "joy3.jpg"
+      base = "app/assets/images/joy3.jpg"
       draw = "text -145,-35 '#{sentense}'"
     when "joy4" then
-      base = "joy4.jpg"
+      base = "app/assets/images/joy4.jpg"
       color = "black"
       draw = "text -130,-10 '#{sentense}'"
     when "wow" then
-      base = "wow.jpg"
+      base = "app/assets/images/wow.jpg"
       draw = "text -125,-10 '#{sentense}'"
     when "cow" then
-      base = "cow.jpg"
+      base = "app/assets/images/cow.jpg"
       draw = "text -130,0 '#{sentense}'"
     when "think" then
-      base = "think.jpg"
+      base = "app/assets/images/think.jpg"
       draw = "text 110,-10 '#{sentense}'"
     when "black" then
-      base = "black.jpg"
+      base = "app/assets/images/black.jpg"
       pointsize += 30
     when "brown" then
-      base = "brown.jpg"
+      base = "app/assets/images/brown.jpg"
       pointsize += 30
     when "darkblue" then
-      base = "darkblue.jpg"
+      base = "app/assets/images/darkblue.jpg"
       pointsize += 30
     when "purple" then
-      base = "purple.jpg"
+      base = "app/assets/images/purple.jpg"
       pointsize += 30
     when "red" then
-      base = "red.jpg"
+      base = "app/assets/images/red.jpg"
       pointsize += 30
     when "lightgreen" then
-      base = "lightgreen.jpg"
+      base = "app/assets/images/lightgreen.jpg"
       color = "black"
       pointsize += 30
     when "pink" then
-      base = "pink.jpg"
+      base = "app/assets/images/pink.jpg"
       color = "black"
       pointsize += 30
     when "skyblue" then
-      base = "skyblue.jpg"
+      base = "app/assets/images/skyblue.jpg"
       color = "black"
       pointsize += 30
     when "white" then
-      base = "white.jpg"
+      base = "app/assets/images/white.jpg"
       color = "black"
       pointsize += 30
     when "yellow" then
-      base = "yellow.jpg"
+      base = "app/assets/images/yellow.jpg"
       color = "black"
       pointsize += 30
     else
-      base = "fire.png"
+      base = "app/assets/images/fire.png"
     end
     image = MiniMagick::Image.open(base)
     image.combine_options do |i|
@@ -196,13 +199,13 @@ class PostsController < ApplicationController
     case Rails.env
       when 'production'
         bucket = storage.directories.get('bigtweet-production')
-        png_path = 'images/' + next_id.to_s + '.png'
+        png_path = 'images/' + id.to_s + '.png'
         image_uri = image.path
         file = bucket.files.create(key: png_path, public: true, body: open(image_uri))
         @post.picture = 'https://s3-ap-northeast-1.amazonaws.com/bigtweet-production' + "/" + png_path
       when 'development'
         bucket = storage.directories.get('bigtweet-development')
-        png_path = 'images/' + next_id.to_s + '.png'
+        png_path = 'images/' + id.to_s + '.png'
         image_uri = image.path
         file = bucket.files.create(key: png_path, public: true, body: open(image_uri))
         @post.picture = 'https://s3-ap-northeast-1.amazonaws.com/bigtweet-development' + "/" + png_path
