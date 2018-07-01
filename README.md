@@ -4,9 +4,6 @@
 BigTweet  
 https://bigtweet.herokuapp.com/
 
-## リリース日
-2018年5月5日
-
 ## 概要
 文字が入った画像を自動生成して、気軽に力強いツイートができるサービス
 
@@ -17,6 +14,13 @@ https://bigtweet.herokuapp.com/
 
 ## 想定している利用者
 Twitterで気軽に目立つツイートがしたい方
+
+## 技術チュートリアル
+【Big Tweetチュートリアル】Ruby on Railsで簡単なサービスを作ってみよう！（初学者向け）  
+https://note.mu/ysk1180/n/n551cafc1f8e1
+
+## リリース日
+2018年5月5日
 
 ## バージョン
 Ruby：2.5.1  
